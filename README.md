@@ -10,7 +10,7 @@ This provides a more robust way to pass data between actors in a single mod, or 
 2. Open your `PrimalGameData` file and add `ObserverSingleton` to your list of singleton actors.
 
 - **With Git (Recommended):**
-1. Add this repo as a submodule with the following command: `git submodule add git@github.com:GyozaGuy/ark-observer.git Observer`
+1. Add this repo as a submodule in your project with the following command: `git submodule add git@github.com:GyozaGuy/ark-observer.git Observer`
 2. Run `git submodule init`
 3. Run `git submodule update`
 4. Open your `PrimalGameData` file and add `ObserverSingleton` to your list of singleton actors.
