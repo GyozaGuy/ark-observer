@@ -26,6 +26,8 @@ There are three methods on the `ObserverSingleton` to be aware of:
 2. `HandleEvent` - takes input from the `ActorCustomEvent` node (available in the ARK Dev Kit) and processes it, returning the event name and event data.
 3. `GetData` - takes the event data (previously processed by `HandleEvent`) and a key and returns the event data that corresponds to that key.
 
+## Emitting an Event
+
 To emit an event, the steps are generally as follows:
 1. Prepare the data you wish to send.
 2. Get a reference to the `ObserverSingleton` actor, and cast it to the `ObserverSingleton` class.
@@ -35,6 +37,8 @@ To emit an event, the steps are generally as follows:
 6. Drag off of the input to the `Make Array` node and look for `Make NameValuePair`.
 7. Enter your data into the `Make NameValuePair` node. Provide a name to associate with the data (the `key`) and the data itself (the `value`).
 8. Repeat steps 6 and 7 for all data you want to add to the event.
+
+## Listening for an Event
 
 To listen for an event, the steps are generally as follows:
 1. Get a reference to `GameMode` and cast it to `ShooterGameMode`.
