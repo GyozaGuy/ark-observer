@@ -1,4 +1,4 @@
-# ark-observer
+# ARK Observer
 A simple singleton to use in ARK modding projects that provides Observer Pattern-esque functionality. This is not a true Observer Pattern implementation, but uses many of the same concepts.
 
 This provides a more robust way to pass data between actors in a single mod, or even between multiple mods without the actors using it needing to have references to anything they are passing the data to.
