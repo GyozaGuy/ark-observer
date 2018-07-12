@@ -53,7 +53,20 @@ To listen for an event, the steps are generally as follows:
 
 The `ObserverSingleton.uasset` file has a usage example built in, but here is another simple example that will help you understand how to use this.
 
+In this example, a player is given a buff, and we emit an event telling the universe the name of the player (stored as `PlayerID`) that got the buff. Any actors that are set up to listen for it will receive the event and have access to the name of the player.
+
+On the actor that is listening for the event, we get the `PlayerID` data from the event data and print it.
+
+## Emitting an Event
+
+![Emitting an event](Examples/Emitting.png)
+
+## Listening for an Event
+
+![Listening for an event](Examples/Listening.png)
+
 # Things to be aware of
 
 - I recommend emitting events and listening for events on the server to avoid duplication. Handle it however you want to though.
 - If you are going to listen for a lot of events, I suggest getting the reference to the `ObserverSingleton` in the `Event Begin Play` logic of your graph and storing it with a variable, then using that variable in the `OnActorCustomEvent` custom event you create to avoid getting the reference more times than you need to. (The same principle applies to emitting events... if you are going to use it a lot in the same graph, get the reference once and store it as a variable.)
+- To get a reference to the `ObserverSingleton`, it _should_ be safe to use the `Get All Actors Of Class` method using the `ObserverSingleton` class, then getting the first element of the resulting array. It's a singleton, so only one should exist. Even if other mods use this singleton, it should be safe because in theory all potential `ObserverSingleton` actors in the game should have the exact same methods available for use.
