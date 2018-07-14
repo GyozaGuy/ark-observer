@@ -33,12 +33,12 @@ To emit an event, follow these steps ([click here for an example](https://github
 1. Prepare the data you wish to send.
 2. Get a reference to the `ObserverSingleton` actor, and cast it to the `ObserverSingleton` class.
 3. Drag off of the `ObserverSingleton` cast node and find the `BuildDataString` method.
-  - Enter the name of your data into the `Name` argument of the `BuildDataString` method. Enter the data itself into the `Value` argument.
-4. Repeat step 3 for all data you want to add to the event.
-5. Drag off of the `Cast to ObserverSingleton` node, and look for the `EmitEvent` method.
-6. Enter an event name directly into the `EmitEvent` node in the appropriate box.
-7. Drag off of the `Data` argument on the `EmitEvent` node and look for the `Make Array` node.
-8. Drag off of the output of any `BuildDataString` methods and connect them to the inputs of the `Make Array` node.
+4. Enter the name of your data into the `Name` argument of the `BuildDataString` method. Enter the data itself into the `Value` argument.
+5. Repeat steps 3 and 4 for all data you want to add to the event.
+6. Drag off of the `Cast to ObserverSingleton` node, and look for the `EmitEvent` method.
+7. Enter an event name directly into the `EmitEvent` node in the appropriate box.
+8. Drag off of the `Data` argument on the `EmitEvent` node and look for the `Make Array` node.
+9. Drag off of the output of any `BuildDataString` methods and connect them to the inputs of the `Make Array` node.
 
 ### Example
 
