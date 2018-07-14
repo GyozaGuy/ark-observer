@@ -5,26 +5,20 @@ This provides a more robust way to pass data between actors in a single mod, or 
 
 # Setup Instructions
 
-- **Without Git:**
-1. Download the `NameValuePair.uasset` and `ObserverSingleton.uasset` files and place them somewhere in your project.
-2. Open your `PrimalGameData` file and add `ObserverSingleton` to your list of singleton actors.
-
-- **With Git (Recommended):**
-1. Add this repo as a submodule in your project with the following command: `git submodule add git@github.com:GyozaGuy/ark-observer.git Observer`
-2. Run `git submodule init`
-3. Run `git submodule update`
-4. Open your `PrimalGameData` file and add `ObserverSingleton` to your list of singleton actors.
-
-If using the Git submodule method, you can easily get any future updates I release by simply running `git submodule update`.
+1. Download the `NameValuePair.uasset` and `ObserverSingleton.uasset` files.
+2. Import the downloaded files into your project.
+3. Rename the imported files to avoid conflicts with other observers in other projects (if you have any).
+4. Open your `PrimalGameData` file and add your renamed `ObserverSingleton` to your list of singleton actors.
 
 # Usage Instructions
 
 You can modify the `ObserverSingleton` directly if you wish, but I recommend leaving it alone and instead referencing it in other graphs to gain access to the methods it provides. This is especially important if you want to easily update it with any updates I release in the future.
 
-There are three methods on the `ObserverSingleton` to be aware of:
+There are four methods on the `ObserverSingleton` to be aware of:
 1. `EmitEvent` - emits an event that other actors can listen for. You need to specify an event name and any event data you wish to send.
 2. `HandleEvent` - takes input from the `ActorCustomEvent` node (available in the ARK Dev Kit) and processes it, returning the event name and event data.
 3. `GetData` - takes the event data (previously processed by `HandleEvent`) and a key and returns the event data that corresponds to that key.
+4. `BuildEventString` - takes the event data and an event name and returns a string representing the event with its data. This happens automatically in `EmitEvent`, but I've made this function available in case you would like to get a raw event for some reason.
 
 ## Emitting an Event
 
