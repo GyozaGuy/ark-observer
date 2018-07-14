@@ -1,7 +1,13 @@
 # ARK Observer
 A simple singleton to use in ARK modding projects that provides Observer Pattern-esque functionality. This is not a true Observer Pattern implementation, but uses many of the same concepts.
 
-This provides a more robust way to pass data between actors in a single mod, or even between multiple mods without the actors using it needing to have references to anything they are passing the data to.
+This provides a more robust way to pass data between actors in a mod. This even works between different mods, which is useful because the actors using it don't need to have references to anything they are passing the data to.
+
+## Useful Reading
+
+**Observer Pattern:** [https://en.wikipedia.org/wiki/Observer_pattern](https://en.wikipedia.org/wiki/Observer_pattern)
+
+**Singleton Pattern:** [https://en.wikipedia.org/wiki/Singleton_pattern](https://en.wikipedia.org/wiki/Singleton_pattern)
 
 # Setup Instructions
 
@@ -12,7 +18,7 @@ This provides a more robust way to pass data between actors in a single mod, or 
 
 # Usage Instructions
 
-You can modify the `ObserverSingleton` directly if you wish, but I recommend leaving it alone and instead referencing it in other graphs to gain access to the methods it provides. This is especially important if you want to easily update it with any updates I release in the future.
+You can modify the `ObserverSingleton` directly if you wish, but I recommend leaving it alone. Instead, reference it in other graphs to gain access to its methods. This is especially important if you want to easily update it with future releases.
 
 There are four methods on the `ObserverSingleton` to be aware of:
 1. `EmitEvent` - emits an event that other actors can listen for. You need to specify an event name and any event data you wish to send.
@@ -22,7 +28,7 @@ There are four methods on the `ObserverSingleton` to be aware of:
 
 ## Emitting an Event
 
-To emit an event, the steps are generally as follows:
+To emit an event, follow these steps ([click here for an example](https://github.com/GyozaGuy/ark-observer#emitting-an-event-1)):
 1. Prepare the data you wish to send.
 2. Get a reference to the `ObserverSingleton` actor, and cast it to the `ObserverSingleton` class.
 3. Drag off of the cast node, and look for the `EmitEvent` method.
@@ -32,9 +38,17 @@ To emit an event, the steps are generally as follows:
 7. Enter your data into the `Make NameValuePair` node. Provide a name to associate with the data (the `key`) and the data itself (the `value`).
 8. Repeat steps 6 and 7 for all data you want to add to the event.
 
+### Example
+
+The `ObserverSingleton.uasset` file has a usage example built in if you need a reference while in the Dev Kit.
+
+In this example, a player is given a buff, and we emit an event telling the universe the name of the player (stored as `PlayerID`) that got the buff. Any actors that are set up to listen for it will receive the event and have access to the name of the player.
+
+![Emitting an event](Examples/Emitting.png)
+
 ## Listening for an Event
 
-To listen for an event, the steps are generally as follows:
+To listen for an event, follow these steps ([click here for an example](https://github.com/GyozaGuy/ark-observer#listening-for-an-event-1)):
 1. Get a reference to `GameMode` and cast it to `ShooterGameMode`.
 2. Drag off of the cast to `ShooterGameMode` node and look for the `Bind Event to OnActorCustomEvent` node.
 3. Drag off of the red method box on the event node and select the option to create a new custom event. Name it whatever you want.
@@ -47,25 +61,15 @@ To listen for an event, the steps are generally as follows:
 10. Enter the key for the data you want into the `Key` argument of the `GetData` function.
 11. The `Value` output of the `GetData` function will be the data you requested with the provided `Key` value, assuming it exists in the event data.
 
-# Usage Example
-
-The `ObserverSingleton.uasset` file has a usage example built in, but here is another simple example that will help you understand how to use this.
-
-In this example, a player is given a buff, and we emit an event telling the universe the name of the player (stored as `PlayerID`) that got the buff. Any actors that are set up to listen for it will receive the event and have access to the name of the player.
+### Example
 
 On the actor that is listening for the event, we get the `PlayerID` data from the event data and print it.
-
-## Emitting an Event
-
-![Emitting an event](Examples/Emitting.png)
-
-## Listening for an Event
 
 ![Listening for an event](Examples/Listening.png)
 
 # Things to be aware of
 
 - I recommend emitting events and listening for events on the server to avoid duplication. Handle it however you want to though.
-- If you are going to listen for a lot of events, I suggest getting the reference to the `ObserverSingleton` in the `Event Begin Play` logic of your graph and storing it with a variable, then using that variable in the `OnActorCustomEvent` custom event you create to avoid getting the reference more times than you need to. (The same principle applies to emitting events... if you are going to use it a lot in the same graph, get the reference once and store it as a variable.)
+- If you are going to listen for a lot of events, I suggest getting the reference to the `ObserverSingleton` in the `Event Begin Play` logic of your graph and storing it with a variable. Use that variable in the `OnActorCustomEvent` custom event you create to avoid getting the reference more times than you need to. (The same principle applies to emitting events... if you are going to use it a lot in the same graph, get the reference once and store it as a variable.)
 - To get a reference to the `ObserverSingleton`, it _should_ be safe to use the `Get All Actors Of Class` method using the `ObserverSingleton` class, then getting the first element of the resulting array. It's a singleton, so only one should exist. Even if other mods use this singleton, it should be safe because in theory all potential `ObserverSingleton` actors in the game should have the exact same methods available for use.
 - It is probably a good idea to use a small delay before emitting an event after your mod does something, especially in the case in the example where I'm spawning a buff and then listening for an event on that buff. The delay gives the buff a chance to be created.
