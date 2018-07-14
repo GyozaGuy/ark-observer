@@ -44,7 +44,7 @@ The `ObserverSingleton.uasset` file has a usage example built in if you need a r
 
 In this example, a player is given a buff, and we emit an event telling the universe the name of the player (stored as `PlayerID`) that got the buff. Any actors that are set up to listen for it will receive the event and have access to the name of the player.
 
-![Emitting an event](Examples/Emitting.png)
+![Emitting an event](https://raw.githubusercontent.com/GyozaGuy/ark-observer/master/Examples/Emitting.png)
 
 ## Listening for an Event
 
@@ -65,7 +65,7 @@ To listen for an event, follow these steps ([click here for an example](https://
 
 On the actor that is listening for the event, we get the `PlayerID` data from the event data and print it.
 
-![Listening for an event](Examples/Listening.png)
+![Listening for an event](https://raw.githubusercontent.com/GyozaGuy/ark-observer/master/Examples/Listening.png)
 
 # Things to be aware of
 
