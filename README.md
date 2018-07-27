@@ -13,13 +13,17 @@ This provides a more robust way to pass data between actors in a mod. This even 
 
 # Usage Instructions
 
-There are currently six macros made available by this library:
+There are currently 10 macros made available by this library:
 1. `EmitEvent` - emits an event that other actors can listen for. You need to specify an event name and any event data you wish to send.
 2. `HandleEvent` - takes input from the `ActorCustomEvent` node (available in the ARK Dev Kit) and processes it, returning the event name and event data.
 3. `GetData` - takes the event data (previously processed by `HandleEvent`) and a key and returns the event data that corresponds to that key.
 4. `BuildEventString` - takes the event data and an event name and returns a string representing the event with its data. This happens automatically in `EmitEvent`, but I've made this method available in case you would like to get a raw event for some reason.
 5. `BuildDataString` - takes a name and a value corresponding to the data you want to send and creates a data string using the name and value. If you don't want to use this method, you can easily create the data string yourself by putting the delimiter `:=:` between the name and the value (e.g. `PlayerName:=:MyPlayerName`). The `:=:` delimiter is to reduce the possibility of data containing characters that could conflict with the observer. **If you choose to create your data string manually, it is up to you to sanitize your data to make sure it doesn't include the following delimiters: `#$#`, `:=:`, `!@!` (used internally)**
 6. `SanitizeEventData` - used internally in `BuildDataString`, this makes sure the data passed in is properly sanitized to not contain any of the internally used delimiters. It also trims whitespace.
+7. `VectorFromString` - used to convert a string into a vector. Only works with strings in the format returned from the vector string conversion node.
+8. `RotationFromString` - used to convert a string into a rotation. Only works with strings in the format returned from the rotation string conversion node.
+9. `TransformFromString` - used to convert a string into a transform. Only works with strings in the format returned from the transform string conversion node.
+10. `BooleanFromString` - used to convert a string into a boolean. Passing in the strings `true` or `1` will return the boolean `true`, otherwise it returns the boolean `false`.
 
 ## Emitting an Event
 
