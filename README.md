@@ -63,3 +63,4 @@ On the actor that is listening for the `PlayerSpawned` event, we get the `Player
 # Things to be aware of
 
 - I recommend emitting events and listening for events on the server to avoid duplication. Handle it however you want to though.
+- For some reason emitting events does not work from weapons. If you want to emit an event from a weapon, emit it from a buff on the player using the weapon instead. Emitting events from other types of primal items _does_ work.
